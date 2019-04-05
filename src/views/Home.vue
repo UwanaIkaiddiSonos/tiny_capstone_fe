@@ -17,7 +17,8 @@
         <p>name: <input type="text" v-model="product.name"></p>
         <p>price: <input type="text" v-model="product.price"></p>
         <p>description: <input type="text" v-model="product.description"></p>
-        <button v-on:click="updateProduct(product)">Update the product</button>      
+        <button v-on:click="updateProduct(product)">Update the product</button>
+        <button v-on:click="deleteProduct(product)">Delete the product</button>      
       </div>
       <hr>
     </div>
@@ -84,6 +85,18 @@ export default {
       axios.patch("/api/products/" + theProduct.id, params).then(response => {
         console.log(response);
         theProduct = response.data;
+      })
+    },
+    deleteProduct: function(theProduct) {
+      console.log('deleting the product...');
+      // make an HTTP request using axios to the destroy action of my API
+      axios.delete("/api/products/" + theProduct.id).then(response => {
+        console.log(response);
+        // delete the product from the products array
+        // find the index of that product in the array
+        var index = this.products.indexOf(theProduct);
+        // remove the item based on that index
+        this.products.splice(index, 1);
       })
     }
   }
