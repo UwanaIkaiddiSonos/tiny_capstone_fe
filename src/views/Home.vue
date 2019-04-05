@@ -11,10 +11,14 @@
       <p>{{ product.price }}</p>
       <!--<p>{{ product.description }}</p>-->
       <p><img v-bind:src="product.image_url"></p>
+      <button v-on:click="toggleInfo(product)">Show more info</button>
       <div v-if="product === currentProduct">
         <p>{{ product.description}}</p>
+        <p>name: <input type="text" v-model="product.name"></p>
+        <p>price: <input type="text" v-model="product.price"></p>
+        <p>description: <input type="text" v-model="product.description"></p>
+        <button v-on:click="updateProduct(product)">Update the product</button>      
       </div>
-      <button v-on:click="currentProduct = product">Show more info</button>
       <hr>
     </div>
   </div>
@@ -58,6 +62,29 @@ export default {
         console.log(response.data);
         this.products.push(response.data);
       });
+    },
+    toggleInfo: function(theProduct) {
+      if (this.currentProduct === theProduct) {
+        // I am seeing the info already
+        this.currentProduct = {};
+      } else {
+        // we cannot see the info
+        this.currentProduct = theProduct;
+      }
+      console.log('toggling info...');
+    },
+    updateProduct: function(theProduct) {
+      console.log(theProduct)
+      console.log('updating the product...');
+      var params = {
+        input_name: theProduct.name,
+        input_price: theProduct.price,
+        input_description: theProduct.description,
+      };
+      axios.patch("/api/products/" + theProduct.id, params).then(response => {
+        console.log(response);
+        theProduct = response.data;
+      })
     }
   }
 };
