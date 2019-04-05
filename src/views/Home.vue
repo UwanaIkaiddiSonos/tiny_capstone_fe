@@ -34,7 +34,7 @@ export default {
       message: "Hello to Vue.js!",
       products: [],
       newProductName: "",
-      newProductPrice: "",
+      newProductPrice: "" ,
       newProductDescription: "",
       currentProduct: {}
     };
