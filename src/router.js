@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Test from './views/Test.vue'
 import ProductsNew from './views/ProductsNew.vue'
 import ProductsShow from './views/ProductsShow.vue'
+import ProductsEdit from './views/ProductsEdit.vue'
 
 
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/test',
       name: 'test',
       component: Test
+    },
+    {
+      path: '/products/:id/edit',
+      name: 'products-edit',
+      component: ProductsEdit
     },
     {
       path: '/products/new',

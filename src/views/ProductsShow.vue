@@ -5,6 +5,7 @@
     <p>{{ product.price }}</p>
     <img v-bind:src="product.image_url">
     <p>{{ product.description }}</p>
+    <router-link v-bind:to="'/products/' + product.id + '/edit'">Edit the product</router-link>
   </div>
 </template>
 
@@ -25,7 +26,7 @@ export default {
     };
   },
   created: function() {
-    axios.get("/api/productscd ../../" + this.$route.params.id).then(response => {
+    axios.get("/api/products/" + this.$route.params.id).then(response => {
       console.log(response.data)
       this.product = response.data;
     })
