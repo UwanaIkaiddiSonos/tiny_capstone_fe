@@ -1,25 +1,13 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
-    <p>Name: <input type="text" v-model="newProductName"></p>
-    <p>Price: <input type="text" v-model="newProductPrice"></p>
-    <p>Description: <input type="text" v-model="newProductDescription"></p>
-    <button v-on:click="addNewProduct()">Add a new product</button>
-
+<!-- <h1>products: {{ products }}</h1> -->
     <div v-for="product in products">
       <p>{{ product.name }}</p>
       <p>{{ product.price }}</p>
       <!--<p>{{ product.description }}</p>-->
-      <p><img v-bind:src="product.image_url"></p>
-      <button v-on:click="toggleInfo(product)">Show more info</button>
-      <div v-if="product === currentProduct">
-        <p>{{ product.description}}</p>
-        <p>name: <input type="text" v-model="product.name"></p>
-        <p>price: <input type="text" v-model="product.price"></p>
-        <p>description: <input type="text" v-model="product.description"></p>
-        <button v-on:click="updateProduct(product)">Update the product</button>
-        <button v-on:click="deleteProduct(product)">Delete the product</button>      
-      </div>
+      <!-- <button v-on:click="toggleInfo(recipe)">Show more info</button> -->
+      <router-link v-bind:to="'/products/' + product.id">See more info</router-link>
       <hr>
     </div>
   </div>
